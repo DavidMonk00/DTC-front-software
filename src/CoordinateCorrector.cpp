@@ -27,7 +27,7 @@ std::array<Stub*, PAYLOAD_WIDTH> CoordinateCorrector::run() {
         payload.z += matrix[1]*(int)intrinsic.column;
         payload.phi += (matrix[2]*(int)intrinsic.strip + matrix[3]*(int)intrinsic.crossterm);
         #ifdef DEBUG
-        stubs[i]->print();
+        // stubs[i]->print();
         #endif
     }
     return stubs;

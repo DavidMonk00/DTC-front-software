@@ -8,3 +8,4 @@
 #include "LinkFormatter.hpp"
 #include "StubFormatter.hpp"
 #include "CoordinateCorrector.hpp"
+#include "Geometry.hpp"

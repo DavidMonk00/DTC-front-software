@@ -9,7 +9,7 @@ CICHeader CICStub::getHeader(void) {
 }
 
 void CICStub::setHeader(CICHeader CICStub_header) {
-	CICStub_header = header;
+	header = CICStub_header;
 }
 
 CICPayload CICStub::getPayload(void) {
@@ -17,6 +17,5 @@ CICPayload CICStub::getPayload(void) {
 }
 
 void CICStub::setPayload(CICPayload CICStub_payload) {
-	CICStub_payload = payload;
+	payload = CICStub_payload;
 }
-

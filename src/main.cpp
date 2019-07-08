@@ -9,5 +9,10 @@ int main(int argc, char const *argv[]) {
         CoordinateCorrector coordinate_corrector(stub_formatter.run());
         coordinate_corrector.run();
     }
+
+    Geometry g;
+    g.getData();
+    g.getModules()[0].print();
+
     return 0;
 }

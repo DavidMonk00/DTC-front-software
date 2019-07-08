@@ -46,7 +46,7 @@ class HeaderFile:
         for line in self.lines:
             if line.startswith("class"):
                 self.class_name = line.split(" ")[1]
-            reg = re.search("[A-Za-z\~]*\ [A-Za-z\~]*;", line)
+            reg = re.search("[A-Za-z\~\<\>\:]*\ [A-Za-z\_]*;", line)
             if reg:
                 datum = reg.group()[:-1].split(" ")
                 get_method = "%s %s::get%s(void) {\n\treturn %s;\n}" % (
@@ -55,9 +55,9 @@ class HeaderFile:
                     datum[0], datum[1].capitalize()
                 ))
                 self.methods.append(get_method)
-                set_method = "void %s::set%s(%s %s_%s) {\n\t%s_%s = %s;\n}" % (
+                set_method = "void %s::set%s(%s %s_%s) {\n\t%s = %s_%s;\n}" % (
                     self.class_name, datum[1].capitalize(), datum[0],
-                    self.class_name, datum[1], self.class_name, datum[1],
+                    self.class_name, datum[1], datum[1], self.class_name,
                     datum[1])
                 self.header_methods.append("void set%s(%s %s_%s);\n" % (
                     datum[1].capitalize(), datum[0], self.class_name,
@@ -87,7 +87,7 @@ class HeaderFile:
 
 
 def main():
-    if len(sys.argv > 1):
+    if len(sys.argv) > 1:
         header = HeaderFile(sys.argv[1])
         header.constructSourceFile()
 
