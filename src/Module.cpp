@@ -8,11 +8,11 @@ Module::Module(std::vector<std::string> params) {
     setR(std::stof(params[5]));
     setZ(std::stof(params[6]));
     setTilt_angle(std::stof(params[7]));
-    setPhi(std::stof(params[8]));
-    setWidth(std::stof(params[9]));
-    setLength(std::stof(params[10]));
-    setSpacing(std::stof(params[11]));
-    setThickness(std::stof(params[12]));
+    setPhi(std::stof(params[9]));
+    setWidth(std::stof(params[10]));
+    setLength(std::stof(params[11]));
+    setSpacing(std::stof(params[12]));
+    setThickness(std::stof(params[13]));
 }
 
 Module::~Module(void) {}

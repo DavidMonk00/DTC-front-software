@@ -20,10 +20,16 @@ std::vector<std::string> Geometry::splitLine(std::string line) {
 }
 
 void Geometry::getData(void) {
+    int index = 0;
     std::string line;
     std::getline(datafile, line);
     while(std::getline(datafile, line)) {
         modules.push_back(Module(splitLine(line)));
+        float phi = modules[index].getPhi();
+        if (phi > 0 & phi < 40) {
+            modules[index].print();
+        }
+        index++;
     }
 }
 

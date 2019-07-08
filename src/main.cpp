@@ -12,7 +12,6 @@ int main(int argc, char const *argv[]) {
 
     Geometry g;
     g.getData();
-    g.getModules()[0].print();
 
     return 0;
 }
