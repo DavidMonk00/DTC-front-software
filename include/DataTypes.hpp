@@ -15,11 +15,6 @@ struct CICPayload {
     uint8_t bend;
 };
 
-struct CICStub {
-    CICHeader header;
-    CICPayload payload;
-};
-
 struct StubHeader {
     uint8_t bx;
     uint8_t nonant;
@@ -41,10 +36,4 @@ struct StubPayload {
     uint8_t layer;
     bool barrel;
     bool module;
-};
-
-struct Stub {
-    StubHeader header;
-    StubIntrinsicCoordinates intrinsic;
-    StubPayload payload;
 };

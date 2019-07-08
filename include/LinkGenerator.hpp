@@ -15,7 +15,7 @@
 class LinkGenerator : public Entity {
 private:
     std::ifstream datafile;
-
+    
     uint64_t getLine();
 
 public:
