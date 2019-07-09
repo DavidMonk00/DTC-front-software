@@ -13,6 +13,7 @@
 #include "constants.hpp"
 #include "commonfuncs.hpp"
 #include "Module.hpp"
+#include "NonantAssigment.hpp"
 
 class Geometry {
 private:
@@ -25,7 +26,9 @@ public:
 
     std::vector<std::string> splitLine(std::string line);
     void getData(void);
+    void runNonantAssignment(void);
 
     std::vector<Module> getModules(void);
     void setModules(std::vector<Module> Geometry_modules);
+
 };

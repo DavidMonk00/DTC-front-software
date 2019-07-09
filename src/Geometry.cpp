@@ -40,3 +40,10 @@ std::vector<Module> Geometry::getModules(void) {
 void Geometry::setModules(std::vector<Module> Geometry_modules) {
     modules = Geometry_modules;
 }
+
+void Geometry::runNonantAssignment(void) {
+    NonantAssigment assigner;
+    for (auto i : modules) {
+        assigner.assignModule(i);
+    }
+}

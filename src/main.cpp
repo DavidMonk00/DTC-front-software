@@ -12,6 +12,7 @@ int main(int argc, char const *argv[]) {
 
     Geometry g;
     g.getData();
+    g.runNonantAssignment();
 
     return 0;
 }
