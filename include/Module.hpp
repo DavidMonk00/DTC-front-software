@@ -9,6 +9,7 @@
 #include <ios>
 #include <array>
 #include <vector>
+#include <regex>
 
 #include "constants.hpp"
 #include "commonfuncs.hpp"
@@ -28,6 +29,7 @@ private:
     float length;
     float spacing;
     float thickness;
+    int module_type;
 
 public:
     Module(std::vector<std::string> params);
@@ -61,4 +63,6 @@ public:
     void setSpacing(float Module_spacing);
     float getThickness(void);
     void setThickness(float Module_thickness);
+    int getModule_type(void);
+    void setModule_type(int Module_module_type);
 };

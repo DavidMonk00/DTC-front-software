@@ -13,6 +13,13 @@ Module::Module(std::vector<std::string> params) {
     setLength(std::stof(params[11]));
     setSpacing(std::stof(params[12]));
     setThickness(std::stof(params[13]));
+
+    std::regex reg_2s("(.*)(2S)(.*)");
+    std::regex reg_ec("(.*)(D_1)(.*)");
+    setModule_type(
+        std::regex_match(getSection(), reg_2s) ||
+        std::regex_match(getSection(), reg_ec)
+    );
 }
 
 Module::~Module(void) {}
@@ -135,4 +142,12 @@ float Module::getThickness(void) {
 
 void Module::setThickness(float Module_thickness) {
 	thickness = Module_thickness;
+}
+
+int Module::getModule_type(void) {
+    return module_type;
+}
+
+void Module::setModule_type(int Module_module_type) {
+    module_type = Module_module_type;
 }

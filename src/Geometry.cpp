@@ -26,9 +26,9 @@ void Geometry::getData(void) {
     while(std::getline(datafile, line)) {
         modules.push_back(Module(splitLine(line)));
         float phi = modules[index].getPhi();
-        if (phi > 0 & phi < 40) {
-            modules[index].print();
-        }
+        // if (phi > 0 & phi < 40) {
+        //     modules[index].print();
+        // }
         index++;
     }
 }

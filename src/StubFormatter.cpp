@@ -18,6 +18,8 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
 StubFormatter::~StubFormatter(void) {}
 
 std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(void) {
+    NonantAssigment assigner;
+
     std::array<Stub*, PAYLOAD_WIDTH> stub_array;
     for (int i = 0; i < PAYLOAD_WIDTH; i++) {
         CICHeader cic_header = cic_array[i]->getHeader();
@@ -39,7 +41,6 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(void) {
         payload.bend = cic_payload.bend;
         intrinsic.crossterm = (int)((int)getSlice<uint8_t>(cic_payload.row, 8, 0) * (int)cic_payload.column);
 
-        header.nonant = getSlice<uint8_t>(lut[address], 2, 0);
         payload.r = getSlice<int>(lut[address], 14, 2);
         payload.z = getSlice<int>(lut[address], 26, 14);
         payload.phi = getSlice<int>(lut[address], 43, 26);
@@ -47,6 +48,8 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(void) {
         payload.layer = getSlice<uint8_t>(lut[address], 48, 46);
         payload.barrel = getSlice<bool>(lut[address], 49, 48);
         payload.module = getSlice<bool>(lut[address], 50, 49);
+
+        header.nonant = getSlice<uint8_t>(lut[address], 2, 0);
 
         stub_array[i]->setHeader(header);
         stub_array[i]->setIntrinsicCoordinates(intrinsic);

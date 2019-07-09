@@ -7,4 +7,6 @@
 
 #define LINK_NUMBER 36
 
+#define PI 3.14159265359
+
 extern const std::string path;

@@ -11,6 +11,7 @@
 #include "commonfuncs.hpp"
 #include "Stub.hpp"
 #include "CICStub.hpp"
+#include "NonantAssigment.hpp"
 
 class StubFormatter {
 private:
