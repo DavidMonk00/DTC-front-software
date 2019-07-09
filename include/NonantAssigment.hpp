@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <cmath>
+#include <cstdint>
 
 #include "constants.hpp"
 #include "commonfuncs.hpp"
@@ -27,6 +28,6 @@ public:
     virtual ~NonantAssigment(void);
 
     int assignModule(float r, int module_type, float spacing);
-    int assignModule(Module module);
+    int assignModule(Module module, float phi0, uint8_t bend);
 
 };

@@ -44,6 +44,6 @@ void Geometry::setModules(std::vector<Module> Geometry_modules) {
 void Geometry::runNonantAssignment(void) {
     NonantAssigment assigner;
     for (auto i : modules) {
-        assigner.assignModule(i);
+        std::cout << assigner.assignModule(i, 0.0, 0) << std::endl;
     }
 }

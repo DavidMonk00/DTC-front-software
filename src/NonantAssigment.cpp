@@ -25,7 +25,7 @@ NonantAssigment::~NonantAssigment(void) {
 //     return D > 0;
 // }
 
-int NonantAssigment::assignModule(Module module) {
+int NonantAssigment::assignModule(Module module, float phi0, uint8_t bend) {
     float r = module.getR();
     float z = module.getZ();
     float rT = r - T_rphi;
@@ -46,7 +46,16 @@ int NonantAssigment::assignModule(Module module) {
     float phiRes = abs(rT) * BconvPt;
     float estPhiRes = BendCut * D * fabs(C);
     estPhiRes = (estPhiRes < phiSecWidth/2) ? estPhiRes : phiSecWidth/2;
-    // float deltaPhi = phi0 - phiSec[0];
-    // float deltaEstPhi = deltaPhi + bend * D * C;
-    return D > 0;
+    int sectors = 0;
+    for (int i = 0; i < phiSec.size(); i++) {
+        float deltaPhi = phi0 - phiSec[i];
+        float deltaEstPhi = deltaPhi + (float)(int)bend * D * C;
+        
+        bool deltaPhiChk = fabs(deltaPhi) < phiSecWidth/2 + phiRes;
+        bool deltaEstPhiChk = fabs(deltaEstPhi) < phiSecWidth/2 + estPhiRes;
+        if (deltaPhiChk && deltaEstPhiChk) {
+            sectors += i + 1;
+        }
+    }
+    return sectors - 1;
 }
