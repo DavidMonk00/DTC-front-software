@@ -17,7 +17,7 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
 
 StubFormatter::~StubFormatter(void) {}
 
-std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(void) {
+std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules) {
     NonantAssigment assigner;
 
     std::array<Stub*, PAYLOAD_WIDTH> stub_array;
@@ -49,7 +49,10 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(void) {
         payload.barrel = getSlice<bool>(lut[address], 49, 48);
         payload.module = getSlice<bool>(lut[address], 50, 49);
 
-        header.nonant = getSlice<uint8_t>(lut[address], 2, 0);
+
+        float phi0 = phiParameters.range * (float)cic_payload.row/pow(2, 10) - phiParameters.range/2;
+        float bend = 2.5 * (float)cic_payload.bend/pow(2,3) - 1.25;
+        header.nonant = (uint8_t)assigner.assignModule(modules[i], phi0, bend);
 
         stub_array[i]->setHeader(header);
         stub_array[i]->setIntrinsicCoordinates(intrinsic);

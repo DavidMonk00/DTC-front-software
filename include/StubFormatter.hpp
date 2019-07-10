@@ -22,5 +22,5 @@ private:
 public:
     StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int link = 0);
     virtual ~StubFormatter(void);
-    std::array<Stub*, PAYLOAD_WIDTH> run(void);
+    std::array<Stub*, PAYLOAD_WIDTH> run(std::vector<Module> modules);
 };

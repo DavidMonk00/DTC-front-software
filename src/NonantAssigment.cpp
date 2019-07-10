@@ -57,5 +57,5 @@ int NonantAssigment::assignModule(Module module, float phi0, uint8_t bend) {
             sectors += i + 1;
         }
     }
-    return sectors - 1;
+    return sectors;
 }

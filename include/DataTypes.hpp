@@ -12,7 +12,7 @@ struct CICPayload {
     uint8_t bx;
     uint16_t row;
     uint8_t column;
-    uint8_t bend;
+    int8_t bend;
 };
 
 struct StubHeader {

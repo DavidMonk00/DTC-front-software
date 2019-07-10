@@ -2,6 +2,7 @@
 #include <vector>
 #include <array>
 #include <cstdint>
+#include <string>
 
 #include "constants.hpp"
 #include "LinkGenerator.hpp"
@@ -9,3 +10,4 @@
 #include "StubFormatter.hpp"
 #include "CoordinateCorrector.hpp"
 #include "Geometry.hpp"
+#include "Module.hpp"

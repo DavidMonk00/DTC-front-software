@@ -21,7 +21,7 @@ std::array<CICStub*, PAYLOAD_WIDTH> LinkFormatter::run(void) {
         payload.bx = getSlice<uint8_t>(link_in[HEADER_WIDTH + i], 63, 57);
         payload.row = getSlice<uint16_t>(link_in[HEADER_WIDTH + i], 57, 47);
         payload.column = getSlice<uint8_t>(link_in[HEADER_WIDTH + i], 47, 43);
-        payload.bend = getSlice<uint8_t>(link_in[HEADER_WIDTH + i], 43, 40);
+        payload.bend = getSlice<int8_t>(link_in[HEADER_WIDTH + i], 43, 40);
 
         cic_array[i]->setHeader(header);
         cic_array[i]->setPayload(payload);

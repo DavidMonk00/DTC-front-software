@@ -19,18 +19,13 @@ std::vector<std::string> Geometry::splitLine(std::string line) {
     return result;
 }
 
-void Geometry::getData(void) {
-    int index = 0;
+std::vector<Module> Geometry::getData(void) {
     std::string line;
     std::getline(datafile, line);
     while(std::getline(datafile, line)) {
         modules.push_back(Module(splitLine(line)));
-        float phi = modules[index].getPhi();
-        // if (phi > 0 & phi < 40) {
-        //     modules[index].print();
-        // }
-        index++;
     }
+    return modules;
 }
 
 std::vector<Module> Geometry::getModules(void) {

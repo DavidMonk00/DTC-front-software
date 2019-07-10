@@ -25,7 +25,7 @@ public:
     virtual ~Geometry(void);
 
     std::vector<std::string> splitLine(std::string line);
-    void getData(void);
+    std::vector<Module> getData(void);
     void runNonantAssignment(void);
 
     std::vector<Module> getModules(void);
