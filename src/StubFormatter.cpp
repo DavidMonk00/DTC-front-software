@@ -26,7 +26,15 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         CICPayload cic_payload = cic_array[i]->getPayload();
 
         stub_array[i] = new Stub;
-        int address = (link_number << 3) + (int)getSlice<uint8_t>(cic_payload.row, 11, 8);
+        ExactCorrection corrector(&(modules[i]));
+        
+        int cic = (int)getSlice<uint8_t>(cic_payload.row, 11, 8);
+        int address = (link_number << 3) + cic;
+        float x = (cic + 1) * modules[i].getWidth()/16 - modules[i].getWidth()/2;
+        float z = (float)cic_payload.column;
+        float r_true = corrector.r(x, z);
+
+
         uint8_t bx_tmp = getSlice<uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
         bx_tmp += getSlice<uint8_t>(cic_payload.bx, 3, 0);
 

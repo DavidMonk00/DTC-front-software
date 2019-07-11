@@ -12,6 +12,7 @@
 #include "Stub.hpp"
 #include "CICStub.hpp"
 #include "NonantAssigment.hpp"
+#include "Correction.hpp"
 
 class StubFormatter {
 private:
