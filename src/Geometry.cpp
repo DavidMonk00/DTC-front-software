@@ -42,3 +42,30 @@ void Geometry::runNonantAssignment(void) {
         std::cout << assigner.assignModule(i, 0.0, 0) << std::endl;
     }
 }
+
+void Geometry::generateLUTs(void) {
+    int cic;
+    float x, z = 0, r_true, phi_true, z_true, width;
+    int length = modules.size();
+    if (modules.size() == 0) getData();
+    length = modules.size();
+    for (auto module: modules) {
+        width = module.getWidth();
+        ExactCorrection corrector(&module);
+        int r_bits;
+        std::vector<int> phi_bits;
+        std::vector<int> z_bits;
+        for (cic = 0; cic < 8; cic++) {
+            x = (2*cic + 1) * width/16 - width/2;
+            r_true = corrector.r(x, z);
+            r_bits = (int)(r_true/rParams.getBasis()) & 0xfff;
+            phi_true = module.getPhi() + corrector.phi(x, z);
+            phi_bits.push_back(phi_true/phiParams.getBasis());
+            z_true = module.getZ() + corrector.z(x, z);
+            z_bits.push_back(z_true/zParams.getBasis());
+            z_true = module.getZ();
+        }
+
+    }
+    return;
+}

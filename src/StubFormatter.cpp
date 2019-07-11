@@ -33,6 +33,7 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         float x = (cic + 1) * modules[i].getWidth()/16 - modules[i].getWidth()/2;
         float z = (float)cic_payload.column;
         float r_true = corrector.r(x, z);
+        int r_bits = r_true/rParams.getBasis();
 
 
         uint8_t bx_tmp = getSlice<uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
@@ -49,13 +50,13 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         payload.bend = cic_payload.bend;
         intrinsic.crossterm = (int)((int)getSlice<uint8_t>(cic_payload.row, 8, 0) * (int)cic_payload.column);
 
-        payload.r = getSlice<int>(lut[address], 14, 2);
-        payload.z = getSlice<int>(lut[address], 26, 14);
-        payload.phi = getSlice<int>(lut[address], 43, 26);
-        payload.alpha = getSlice<int8_t>(lut[address], 46, 43);
-        payload.layer = getSlice<uint8_t>(lut[address], 48, 46);
-        payload.barrel = getSlice<bool>(lut[address], 49, 48);
-        payload.module = getSlice<bool>(lut[address], 50, 49);
+        payload.r = getSlice<int>(lut[address], 12, 0);
+        payload.z = getSlice<int>(lut[address], 24, 12);
+        payload.phi = getSlice<int>(lut[address], 41, 24);
+        payload.alpha = getSlice<int8_t>(lut[address], 44, 41);
+        payload.layer = getSlice<uint8_t>(lut[address], 46, 44);
+        payload.barrel = getSlice<bool>(lut[address], 47, 46);
+        payload.module = getSlice<bool>(lut[address], 48, 47);
 
 
         float phi0 =  (float)cic_payload.row * phiParams.getBasis();

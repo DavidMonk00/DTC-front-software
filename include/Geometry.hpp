@@ -9,11 +9,13 @@
 #include <ios>
 #include <array>
 #include <vector>
+#include <bitset>
 
 #include "constants.hpp"
 #include "commonfuncs.hpp"
 #include "Module.hpp"
 #include "NonantAssigment.hpp"
+#include "Correction.hpp"
 
 class Geometry {
 private:
@@ -30,5 +32,5 @@ public:
 
     std::vector<Module> getModules(void);
     void setModules(std::vector<Module> Geometry_modules);
-
+    void generateLUTs(void);
 };

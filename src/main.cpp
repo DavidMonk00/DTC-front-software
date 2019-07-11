@@ -3,6 +3,7 @@
 
 int main(int argc, char const *argv[]) {
     Geometry g;
+    g.generateLUTs();
     std::vector<Module> modules = g.getData(); 
     for (int i = 0; i < LINK_NUMBER; i++) {
         LinkGenerator link_gen;
@@ -12,7 +13,7 @@ int main(int argc, char const *argv[]) {
         coordinate_corrector.run();
     }
 
-    g.runNonantAssignment();
+    
 
     return 0;
 }

@@ -19,6 +19,6 @@ extern const std::string path;
     
 // } // namespace dtc
 
-static Parameters rParams(75.0, 7);
-static Parameters phiParams(1.02607, 14);
-static Parameters zParams(240.0, 12);
+static Parameters rParams(1200.0, 12);
+static Parameters phiParams(2*PI, 17);
+static Parameters zParams(3000.0, 12);
