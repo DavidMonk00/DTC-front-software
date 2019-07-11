@@ -50,7 +50,7 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         payload.module = getSlice<bool>(lut[address], 50, 49);
 
 
-        float phi0 = phiParameters.range * (float)cic_payload.row/pow(2, 10) - phiParameters.range/2;
+        float phi0 =  (float)cic_payload.row * phiParams.getBasis();
         float bend = 2.5 * (float)cic_payload.bend/pow(2,3) - 1.25;
         header.nonant = (uint8_t)assigner.assignModule(modules[i], phi0, bend);
 

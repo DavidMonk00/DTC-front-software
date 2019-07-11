@@ -1,5 +1,9 @@
+#pragma once
+
 #include <cstdint>
 #include <string>
+
+#include "Parameters.hpp"
 
 #define PACKET_SIZE 64
 #define HEADER_WIDTH 8
@@ -11,20 +15,10 @@
 
 extern const std::string path;
 
-const struct {
-    /* unit: mm */
-    float range;
-    int bits;
-} rParameters = {75.0, 7};
+// namespace dtc {
+    
+// } // namespace dtc
 
-const struct {
-    /* unit: rad */
-    float range;
-    int bits;
-} phiParameters  = {1.02607, 14};
-
-const struct {
-    /* unit: mm */
-    float range;
-    int bits;
-} zParameters = {240.0, 12};
+static Parameters rParams(75.0, 7);
+static Parameters phiParams(1.02607, 14);
+static Parameters zParams(240.0, 12);
