@@ -1,5 +1,10 @@
 #include "Geometry.hpp"
 
+template <class T>
+T setBit(T bits, int n) {
+    return bits |= 1UL << n;
+}
+
 Geometry::Geometry(void) {
     datafile.open(path + "allCoordinates.csv");
     if (!datafile.is_open()) {
@@ -44,28 +49,46 @@ void Geometry::runNonantAssignment(void) {
 }
 
 void Geometry::generateLUTs(void) {
+    std::vector<std::array<uint64_t, 3> > luts;
     int cic;
     float x, z = 0, r_true, phi_true, z_true, width;
     int length = modules.size();
     if (modules.size() == 0) getData();
     length = modules.size();
     for (auto module: modules) {
+        uint64_t entry = 0;
         width = module.getWidth();
         ExactCorrection corrector(&module);
-        int r_bits;
-        std::vector<int> phi_bits;
-        std::vector<int> z_bits;
+        uint64_t r_bits;
+        uint64_t phi_bits;
+        uint64_t z_bits;
+        uint64_t layer = module.getLayer() & 0x3;
+        uint64_t barrel = 0x0 & 0x1;
+        uint64_t module_type = module.getModule_type() & 0x1;
         for (cic = 0; cic < 8; cic++) {
             x = (2*cic + 1) * width/16 - width/2;
             r_true = corrector.r(x, z);
-            r_bits = (int)(r_true/rParams.getBasis()) & 0xfff;
+            r_bits = (uint64_t)(r_true/rParams.getBasis()) & 0xfff;
             phi_true = module.getPhi() + corrector.phi(x, z);
-            phi_bits.push_back(phi_true/phiParams.getBasis());
+            phi_bits = (uint64_t)(phi_true/phiParams.getBasis()) & 0x1ffff;
             z_true = module.getZ() + corrector.z(x, z);
-            z_bits.push_back(z_true/zParams.getBasis());
-            z_true = module.getZ();
+            z_bits = (uint64_t)((int)(z_true/zParams.getBasis()) & 0xfff);
+            z_bits = (z_true < 0) ? setBit(z_bits, 11) : z_bits;
+            entry = r_bits | (r_bits << 12) | (phi_bits << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
+            luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff, (entry >> 36) & 0x3ffff});
         }
-
+    }
+    std::array<std::ofstream, 3> lut_files;
+    for (int i = 0; i < 3; i++) {
+        lut_files[i].open(path + "modules_" + std::to_string(i) + ".mif");
+    }
+    for (auto lut : luts) {
+        for (int i = 0; i < 3; i++) {
+            lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+        }
+    }
+    for (int i = 0; i < 3; i++) {
+        lut_files[i].close();
     }
     return;
 }

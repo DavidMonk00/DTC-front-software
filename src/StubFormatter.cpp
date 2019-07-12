@@ -5,7 +5,7 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
     cic_array = cic_arr;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
     for (int i = 0; i < 3; i++) {
-        lut_file_array[i] = getLUT("random_" + std::to_string(i) + ".mif");
+        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif");
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[0][i] << 36;
