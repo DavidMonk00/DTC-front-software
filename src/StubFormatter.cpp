@@ -8,9 +8,9 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
         lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif");
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
-        uint64_t word = lut_file_array[0][i] << 36;
+        uint64_t word = lut_file_array[2][i] << 36;
         word += (lut_file_array[1][i] << 18);
-        word += lut_file_array[2][i];
+        word += lut_file_array[0][i];
         lut.push_back(word);
     }
 }

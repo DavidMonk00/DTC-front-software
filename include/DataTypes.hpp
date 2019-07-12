@@ -21,8 +21,8 @@ struct StubHeader {
 };
 
 struct StubIntrinsicCoordinates {
-    int8_t strip;
-    int8_t column;
+    uint8_t strip;
+    uint8_t column;
     int crossterm;
 };
 
