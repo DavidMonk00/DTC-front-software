@@ -5,7 +5,7 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
     cic_array = cic_arr;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
     for (int i = 0; i < 3; i++) {
-        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif");
+        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif", LINK_NUMBER);
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[2][i] << 36;
@@ -26,14 +26,9 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         CICPayload cic_payload = cic_array[i]->getPayload();
 
         stub_array[i] = new Stub;
-        ExactCorrection corrector(&(modules[i]));
         
-        int cic = (int)getSlice<uint8_t>(cic_payload.row, 11, 8);
-        int address = (link_number << 3) + cic;
-        float x = (cic + 1) * modules[i].getWidth()/16 - modules[i].getWidth()/2;
-        float z = (float)cic_payload.column;
-        float r_true = corrector.r(x, z);
-        int r_bits = r_true/rParams.getBasis();
+        int fe_module = (int)getSlice<uint8_t>(cic_payload.row, 10, 7);
+        int address = (link_number << 3) + fe_module;
 
 
         uint8_t bx_tmp = getSlice<uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
@@ -44,7 +39,7 @@ std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules)
         StubPayload payload;
 
         header.bx = bx_tmp % 18;
-        intrinsic.strip = getSlice<uint8_t>(cic_payload.row, 8, 0);
+        intrinsic.strip = getSlice<uint8_t>(cic_payload.row, 7, 0);
         intrinsic.column = cic_payload.column;
         payload.valid = cic_payload.valid;
         payload.bend = cic_payload.bend;

@@ -20,7 +20,7 @@ T getSlice(uint64_t word, int start, int end) {
     return (T)(slice >> (64 - (start - end)));
 }
 
-std::vector<uint64_t> getLUT(std::string filename);
+std::vector<uint64_t> getLUT(std::string filename, int lines=0);
 
 // trim from start (in place)
 static inline void ltrim(std::string &s) {

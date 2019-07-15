@@ -17,6 +17,7 @@
 #include "Module.hpp"
 #include "NonantAssigment.hpp"
 #include "Correction.hpp"
+#include "LUTEntry.hpp"
 
 class Geometry {
 private:
@@ -33,5 +34,6 @@ public:
 
     std::vector<Module> getModules(void);
     void setModules(std::vector<Module> Geometry_modules);
-    void generateLUTs(void);
+    void generateModuleLUTs(void);
+    void generateCorrectionLUTs(void);
 };

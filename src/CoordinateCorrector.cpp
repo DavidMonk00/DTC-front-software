@@ -4,7 +4,7 @@ CoordinateCorrector::CoordinateCorrector(std::array<Stub*, PAYLOAD_WIDTH> stubs_
     stubs = stubs_in;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
     for (int i = 0; i < 3; i++) {
-        lut_file_array[i] = getLUT("random_" + std::to_string(i) + ".mif");
+        lut_file_array[i] = getLUT("random_" + std::to_string(i) + ".mif", LINK_NUMBER);
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[0][i] << 36;

@@ -48,10 +48,11 @@ void Geometry::runNonantAssignment(void) {
     }
 }
 
-void Geometry::generateLUTs(void) {
+void Geometry::generateModuleLUTs(void) {
     std::vector<std::array<uint64_t, 3> > luts;
-    int cic;
-    float x, z = 0, r_true, phi_true, z_true, width;
+    int fe_module;
+    float x, z_local = 0, r_true, phi_true, z_true, width;
+    LUTEntry<uint64_t> r(&rParams), z(&zParams), phi(&phiParams);
     int length = modules.size();
     if (modules.size() == 0) getData();
     length = modules.size();
@@ -65,16 +66,16 @@ void Geometry::generateLUTs(void) {
         uint64_t layer = module.getLayer() & 0x3;
         uint64_t barrel = 0x0 & 0x1;
         uint64_t module_type = module.getModule_type() & 0x1;
-        for (cic = 0; cic < 8; cic++) {
-            x = (2*cic + 1) * width/16 - width/2;
-            r_true = corrector.r(x, z);
-            r_bits = (uint64_t)(r_true/rParams.getBasis()) & 0xfff;
-            phi_true = module.getPhi() + corrector.phi(x, z);
-            phi_bits = (uint64_t)(phi_true/phiParams.getBasis()) & 0x1ffff;
-            z_true = module.getZ() + corrector.z(x, z);
-            z_bits = (uint64_t)((int)(z_true/zParams.getBasis()) & 0xfff);
-            z_bits = (z_true < 0) ? setBit(z_bits, 11) : z_bits;
-            entry = r_bits | (r_bits << 12) | (phi_bits << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
+        for (fe_module = 0; fe_module < 8; fe_module++) {
+            x = (2*fe_module + 1) * width/16 - width/2;
+            r.setExact(corrector.r(x, z_local));
+            r.generateBits(0xfff);
+            phi.setExact(module.getPhi() + corrector.phi(x, z_local));
+            phi.generateBits(0x1ffff);
+            z.setExact(module.getZ() + corrector.z(x, z_local));
+            z.generateBits(0xfff);
+            z.setBits((z.getExact() < 0) ? setBit(z.getBits(), 11) : z.getBits());
+            entry = r.getBits() | (z.getBits() << 12) | (phi.getBits() << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
             luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff, (entry >> 36) & 0x3ffff});
         }
     }
@@ -90,5 +91,62 @@ void Geometry::generateLUTs(void) {
     for (int i = 0; i < 3; i++) {
         lut_files[i].close();
     }
+    return;
+}
+
+
+void Geometry::generateCorrectionLUTs(void) {
+    std::vector<std::array<uint64_t, 3> > luts;
+    int fe_module;
+    float x, z = 0, r_true, phi_true, z_true, width;
+    float xgranularity, zgranularity;
+    LUTEntry<uint64_t> rinv(&phiParams), cosbeta(&zParams), sinbeta(&rParams), sintheta(&rParams);
+    if (modules.size() == 0) getData();
+    for (auto module: modules) {
+        uint64_t entry = 0;
+        width = module.getWidth();
+        xgranularity = module.getWidth()/1024;
+        zgranularity = module.getLength()/16;
+        ExactCorrection corrector(&module);
+        uint64_t r_bits;
+        uint64_t phi_bits;
+        uint64_t z_bits;
+        for (fe_module = 0; fe_module < 8; fe_module++) {
+            r_true = corrector.r(x, z);
+            x = (2*fe_module + 1) * width/16 - width/2;
+            rinv.setExact(xgranularity/r_true);
+            rinv.generateBits(0x1f);
+            std::cout << rinv.getExact()/phiParams.getBasis() << std::endl;
+            cosbeta.setExact(zgranularity*cos(module.getTilt_angle()));
+            cosbeta.generateBits(0x1f);
+            std::cout << cosbeta.getExact()/zParams.getBasis() << std::endl;
+            sinbeta.setExact(zgranularity*sin(module.getTilt_angle()));
+            sinbeta.generateBits(0x1f);
+            std::cout << sinbeta.getExact()/rParams.getBasis() << std::endl;
+            sintheta.setExact(xgranularity*sin(atan(x/module.getR())));
+            sintheta.generateBits(0x1f);
+            std::cout << sintheta.getExact()/rParams.getBasis() << std::endl;
+            // r_bits = (uint64_t)(r_true/rParams.getBasis()) & 0xfff;
+            // phi_true = module.getPhi() + corrector.phi(x, z);
+            // phi_bits = (uint64_t)(phi_true/phiParams.getBasis()) & 0x1ffff;
+            // z_true = module.getZ() + corrector.z(x, z);
+            // z_bits = (uint64_t)((int)(z_true/zParams.getBasis()) & 0xfff);
+            // z_bits = (z_true < 0) ? setBit(z_bits, 11) : z_bits;
+            // entry = r_bits | (r_bits << 12) | (phi_bits << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
+            // luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff, (entry >> 36) & 0x3ffff});
+        }
+    }
+    // std::array<std::ofstream, 3> lut_files;
+    // for (int i = 0; i < 3; i++) {
+    //     lut_files[i].open(path + "modules_" + std::to_string(i) + ".mif");
+    // }
+    // for (auto lut : luts) {
+    //     for (int i = 0; i < 3; i++) {
+    //         lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+    //     }
+    // }
+    // for (int i = 0; i < 3; i++) {
+    //     lut_files[i].close();
+    // }
     return;
 }
