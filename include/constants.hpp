@@ -16,5 +16,5 @@
 extern const std::string path;
 
 static Parameters rParams(1200.0, 12);
-static Parameters phiParams(2*PI, 17);
+static Parameters phiParams(1.02, 17);
 static Parameters zParams(6000.0, 12);

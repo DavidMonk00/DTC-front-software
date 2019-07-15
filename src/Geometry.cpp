@@ -101,6 +101,7 @@ void Geometry::generateCorrectionLUTs(void) {
     float x, z = 0, r_true, phi_true, z_true, width;
     float xgranularity, zgranularity;
     LUTEntry<uint64_t> rinv(&phiParams), cosbeta(&zParams), sinbeta(&rParams), sintheta(&rParams);
+    LUTEntry<uint64_t> sinbeta_rsquared(&phiParams);
     if (modules.size() == 0) getData();
     for (auto module: modules) {
         uint64_t entry = 0;
@@ -126,6 +127,9 @@ void Geometry::generateCorrectionLUTs(void) {
             sintheta.setExact(xgranularity*sin(atan(x/module.getR())));
             sintheta.generateBits(0x1f);
             std::cout << sintheta.getExact()/rParams.getBasis() << std::endl;
+            sinbeta_rsquared.setExact(xgranularity*zgranularity*sin(module.getTilt_angle())/(r_true*r_true));
+            sinbeta_rsquared.generateBits(0x1f);
+            std::cout << sinbeta_rsquared.getExact()/rParams.getBasis() << std::endl;
             // r_bits = (uint64_t)(r_true/rParams.getBasis()) & 0xfff;
             // phi_true = module.getPhi() + corrector.phi(x, z);
             // phi_bits = (uint64_t)(phi_true/phiParams.getBasis()) & 0x1ffff;
