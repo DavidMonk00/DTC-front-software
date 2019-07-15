@@ -12,9 +12,11 @@ CoordinateCorrector::CoordinateCorrector(std::array<Stub*, PAYLOAD_WIDTH> stubs_
         word += lut_file_array[2][i];
         lut.push_back(word);
     }
-    for (int i = 0; i < 4; i++) {
-        matrix.push_back(getSlice<int>(lut[link], 5, 0));
-    }
+    matrix.sintheta = getSlice<int>(lut[link], 5, 0);
+    matrix.sinbeta = getSlice<int>(lut[link], 10, 5);
+    matrix.rinv = getSlice<int>(lut[link], 15, 10);
+    matrix.sinbeta_rsquared = getSlice<int>(lut[link], 20, 15);
+    matrix.cosbeta = getSlice<int>(lut[link], 25, 20);
 }
 
 CoordinateCorrector::~CoordinateCorrector() {}
@@ -23,12 +25,10 @@ std::array<Stub*, PAYLOAD_WIDTH> CoordinateCorrector::run() {
     for (int i = 0; i < PAYLOAD_WIDTH; i++) {
         StubIntrinsicCoordinates intrinsic = stubs[i]->getIntrinsicCoordinates();
         StubPayload payload = stubs[i]->getPayload();
-        payload.r += matrix[0]*(int)intrinsic.column;
-        payload.z += matrix[1]*(int)intrinsic.column;
-        payload.phi += (matrix[2]*(int)intrinsic.strip + matrix[3]*(int)intrinsic.crossterm);
-        #ifdef DEBUG
-        // stubs[i]->print();
-        #endif
+        payload.r += matrix.sinbeta*(int)intrinsic.column + matrix.sintheta*(int)intrinsic.strip;
+        payload.z += matrix.cosbeta*(int)intrinsic.column;
+        payload.phi += matrix.rinv*(int)intrinsic.strip + matrix.sinbeta_rsquared*(int)intrinsic.crossterm;
+        stubs[i]->setPayload(payload);
     }
     return stubs;
 }

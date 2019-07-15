@@ -11,11 +11,20 @@
 #include "DataTypes.hpp"
 #include "Stub.hpp"
 
+struct Matrix
+{
+    int sintheta;
+    int sinbeta;
+    int rinv;
+    int sinbeta_rsquared;
+    int cosbeta;
+};
+
 class CoordinateCorrector {
 private:
     std::array<Stub*, PAYLOAD_WIDTH> stubs;
     std::vector<uint64_t> lut;
-    std::vector<uint64_t> matrix;
+    struct Matrix matrix;
 
 public:
     CoordinateCorrector (std::array<Stub*, PAYLOAD_WIDTH> stubs_in, int link = 0);

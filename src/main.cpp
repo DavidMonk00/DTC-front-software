@@ -26,8 +26,5 @@ int main(int argc, char const *argv[]) {
         all_stubs.push_back(coordinate_corrector.run());
     }
     recordStubs(all_stubs);
-
-    
-
     return 0;
 }
