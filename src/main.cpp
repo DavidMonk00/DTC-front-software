@@ -27,5 +27,13 @@ int main(int argc, char const *argv[]) {
         all_stubs.push_back(coordinate_corrector.run());
     }
     recordStubs(all_stubs);
+    std::ofstream f(path + "output.stubs");
+    f.write((char*)all_stubs[0][0], sizeof(*all_stubs[0][0]));
+    f.close();
+    all_stubs[0][0]->print();
+    std::ifstream r(path + "output.stubs");
+    Stub s;
+    r.read((char*)&s, sizeof(s));
+    s.print();
     return 0;
 }

@@ -96,7 +96,7 @@ void Geometry::generateModuleLUTs(void) {
 
 
 void Geometry::generateCorrectionLUTs(void) {
-    std::vector<std::array<uint64_t, 3> > luts;
+    std::vector<std::array<uint64_t, 2> > luts;
     int fe_module;
     float x, z = 0, r_true, phi_true, z_true, width;
     float xgranularity, zgranularity;
@@ -116,41 +116,30 @@ void Geometry::generateCorrectionLUTs(void) {
             r_true = corrector.r(x, z);
             x = (2*fe_module + 1) * width/16 - width/2;
             rinv.setExact(xgranularity/r_true);
-            rinv.generateBits(0x1f);
-            std::cout << rinv.getExact()/phiParams.getBasis() << std::endl;
+            rinv.generateBits(0x3f);
             cosbeta.setExact(zgranularity*cos(module.getTilt_angle()));
-            cosbeta.generateBits(0x1f);
-            std::cout << cosbeta.getExact()/zParams.getBasis() << std::endl;
+            cosbeta.generateBits(0x3f);
             sinbeta.setExact(zgranularity*sin(module.getTilt_angle()));
-            sinbeta.generateBits(0x1f);
-            std::cout << sinbeta.getExact()/rParams.getBasis() << std::endl;
+            sinbeta.generateBits(0x3f);
             sintheta.setExact(xgranularity*sin(atan(x/module.getR())));
-            sintheta.generateBits(0x1f);
-            std::cout << sintheta.getExact()/rParams.getBasis() << std::endl;
+            sintheta.generateBits(0x3f);
             sinbeta_rsquared.setExact(xgranularity*zgranularity*sin(module.getTilt_angle())/(r_true*r_true));
-            sinbeta_rsquared.generateBits(0x1f);
-            std::cout << sinbeta_rsquared.getExact()/rParams.getBasis() << std::endl;
-            // r_bits = (uint64_t)(r_true/rParams.getBasis()) & 0xfff;
-            // phi_true = module.getPhi() + corrector.phi(x, z);
-            // phi_bits = (uint64_t)(phi_true/phiParams.getBasis()) & 0x1ffff;
-            // z_true = module.getZ() + corrector.z(x, z);
-            // z_bits = (uint64_t)((int)(z_true/zParams.getBasis()) & 0xfff);
-            // z_bits = (z_true < 0) ? setBit(z_bits, 11) : z_bits;
-            // entry = r_bits | (r_bits << 12) | (phi_bits << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
-            // luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff, (entry >> 36) & 0x3ffff});
+            sinbeta_rsquared.generateBits(0x3f);
+            entry = sintheta.getBits() | (sinbeta.getBits() << 6) | (rinv.getBits() << 12) | (sinbeta_rsquared.getBits() << 18) | (cosbeta.getBits() << 24); 
+            luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff});
         }
     }
-    // std::array<std::ofstream, 3> lut_files;
-    // for (int i = 0; i < 3; i++) {
-    //     lut_files[i].open(path + "modules_" + std::to_string(i) + ".mif");
-    // }
-    // for (auto lut : luts) {
-    //     for (int i = 0; i < 3; i++) {
-    //         lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
-    //     }
-    // }
-    // for (int i = 0; i < 3; i++) {
-    //     lut_files[i].close();
-    // }
+    std::array<std::ofstream, 2> lut_files;
+    for (int i = 0; i < 2; i++) {
+        lut_files[i].open(path + "correction_" + std::to_string(i) + ".mif");
+    }
+    for (auto lut : luts) {
+        for (int i = 0; i < 2; i++) {
+            lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+        }
+    }
+    for (int i = 0; i < 2; i++) {
+        lut_files[i].close();
+    }
     return;
 }
