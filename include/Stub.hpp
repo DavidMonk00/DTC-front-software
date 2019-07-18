@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <ios>
+#include <fstream>
 
 #include "constants.hpp"
 #include "DataTypes.hpp"
@@ -15,7 +16,7 @@ private:
 
 public:
     Stub(void);
-    virtual ~Stub(void);
+    ~Stub(void);
 
     StubHeader getHeader(void);
     StubIntrinsicCoordinates getIntrinsicCoordinates(void);
@@ -26,4 +27,5 @@ public:
     void setPayload(StubPayload stub_payload);
 
     void print(void);
+    void writeRaw(std::ofstream& file);
 };

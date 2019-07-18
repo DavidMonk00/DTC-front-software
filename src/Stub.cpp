@@ -47,3 +47,7 @@ void Stub::print(void) {
     std::cout << "barrel: " << std::boolalpha << payload.barrel << '\n';
     std::cout << "module: " << std::boolalpha << payload.module << "\n\n";
 }
+
+void Stub::writeRaw(std::ofstream& file) {
+    file.write((char*)this, sizeof(*this));
+}
