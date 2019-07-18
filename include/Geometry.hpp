@@ -33,7 +33,7 @@ public:
     void runNonantAssignment(void);
 
     std::vector<Module> getModules(void);
-    void setModules(std::vector<Module> Geometry_modules);
+    void setModules(std::vector<Module> modules);
     void generateModuleLUTs(void);
     void generateCorrectionLUTs(void);
 };

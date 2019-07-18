@@ -17,7 +17,7 @@ public:
     virtual ~CICStub(void);
 
     CICHeader getHeader(void);
-    void setHeader(CICHeader CICStub_header);
+    void setHeader(CICHeader header);
     CICPayload getPayload(void);
-    void setPayload(CICPayload CICStub_payload);
+    void setPayload(CICPayload payload);
 };

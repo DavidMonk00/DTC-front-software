@@ -8,14 +8,14 @@ CICHeader CICStub::getHeader(void) {
 	return header;
 }
 
-void CICStub::setHeader(CICHeader CICStub_header) {
-	header = CICStub_header;
+void CICStub::setHeader(CICHeader header) {
+	this->header = header;
 }
 
 CICPayload CICStub::getPayload(void) {
 	return payload;
 }
 
-void CICStub::setPayload(CICPayload CICStub_payload) {
-	payload = CICStub_payload;
+void CICStub::setPayload(CICPayload payload) {
+	this->payload = payload;
 }

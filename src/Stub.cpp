@@ -16,16 +16,16 @@ StubPayload Stub::getPayload(void) {
     return payload;
 }
 
-void Stub::setHeader(StubHeader stub_header) {
-    header = stub_header;
+void Stub::setHeader(StubHeader header) {
+    this->header = header;
 }
 
-void Stub::setIntrinsicCoordinates(StubIntrinsicCoordinates stub_intrinsic) {
-    intrinsic = stub_intrinsic;
+void Stub::setIntrinsicCoordinates(StubIntrinsicCoordinates intrinsic) {
+    this->intrinsic = intrinsic;
 }
 
-void Stub::setPayload(StubPayload stub_payload) {
-    payload = stub_payload;
+void Stub::setPayload(StubPayload payload) {
+    this->payload = payload;
 }
 
 void Stub::print(void) {

@@ -37,8 +37,8 @@ std::vector<Module> Geometry::getModules(void) {
     return modules;
 }
 
-void Geometry::setModules(std::vector<Module> Geometry_modules) {
-    modules = Geometry_modules;
+void Geometry::setModules(std::vector<Module> modules) {
+    this->modules = modules;
 }
 
 void Geometry::runNonantAssignment(void) {

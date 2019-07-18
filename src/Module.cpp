@@ -44,104 +44,104 @@ std::vector<std::string> Module::getString_paramaters(void) {
 	return string_paramaters;
 }
 
-void Module::setString_paramaters(std::vector<std::string> Module_string_paramaters) {
-	string_paramaters = Module_string_paramaters;
+void Module::setString_paramaters(std::vector<std::string> string_paramaters) {
+	this->string_paramaters = string_paramaters;
 }
 
 int Module::getId(void) {
 	return id;
 }
 
-void Module::setId(int Module_id) {
-	id = Module_id;
+void Module::setId(int id) {
+	this->id = id;
 }
 
 std::string Module::getSection(void) {
 	return section;
 }
 
-void Module::setSection(std::string Module_section) {
-	section = Module_section;
+void Module::setSection(std::string section) {
+	this->section = section;
 }
 
 int Module::getLayer(void) {
 	return layer;
 }
 
-void Module::setLayer(int Module_layer) {
-	layer = Module_layer;
+void Module::setLayer(int layer) {
+	this->layer = layer;
 }
 
 int Module::getRing(void) {
 	return ring;
 }
 
-void Module::setRing(int Module_ring) {
-	ring = Module_ring;
+void Module::setRing(int ring) {
+	this->ring = ring;
 }
 
 float Module::getR(void) {
 	return r;
 }
 
-void Module::setR(float Module_r) {
-	r = Module_r;
+void Module::setR(float r) {
+	this->r = r;
 }
 
 float Module::getZ(void) {
 	return z;
 }
 
-void Module::setZ(float Module_z) {
-	z = Module_z;
+void Module::setZ(float z) {
+	this->z = z;
 }
 
 float Module::getTilt_angle(void) {
 	return tilt_angle;
 }
 
-void Module::setTilt_angle(float Module_tilt_angle) {
-	tilt_angle = Module_tilt_angle;
+void Module::setTilt_angle(float tilt_angle) {
+	this->tilt_angle = tilt_angle;
 }
 
 float Module::getPhi(void) {
 	return phi;
 }
 
-void Module::setPhi(float Module_phi) {
-	phi = Module_phi;
+void Module::setPhi(float phi) {
+	this->phi = phi;
 }
 
 float Module::getWidth(void) {
 	return width;
 }
 
-void Module::setWidth(float Module_width) {
-	width = Module_width;
+void Module::setWidth(float width) {
+	this->width = width;
 }
 
 float Module::getLength(void) {
 	return length;
 }
 
-void Module::setLength(float Module_length) {
-	length = Module_length;
+void Module::setLength(float length) {
+	this->length = length;
 }
 
 float Module::getSpacing(void) {
 	return spacing;
 }
 
-void Module::setSpacing(float Module_spacing) {
-	spacing = Module_spacing;
+void Module::setSpacing(float spacing) {
+	this->spacing = spacing;
 }
 
 float Module::getThickness(void) {
 	return thickness;
 }
 
-void Module::setThickness(float Module_thickness) {
-	thickness = Module_thickness;
+void Module::setThickness(float thickness) {
+	this->thickness = thickness;
 }
 
 int Module::getModule_type(void) {
@@ -149,5 +149,5 @@ int Module::getModule_type(void) {
 }
 
 void Module::setModule_type(int Module_module_type) {
-    module_type = Module_module_type;
+    this->module_type = module_type;
 }

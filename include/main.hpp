@@ -19,3 +19,4 @@
 #include "Geometry.hpp"
 #include "Module.hpp"
 #include "Stub.hpp"
+#include "StubReader.hpp"

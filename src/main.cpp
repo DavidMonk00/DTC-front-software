@@ -2,13 +2,27 @@
 
 void recordStubs(std::vector<std::array<Stub*, PAYLOAD_WIDTH> > all_stubs) {
     std::ofstream ofs(path + "output.csv");
+    std::ofstream f(path + "output.stubs", std::ofstream::binary);
     ofs << "r" << "," << "phi" << "," << "z" << std::endl;
     for (auto link : all_stubs) {
         for (auto stub : link) {
             ofs << stub->getPayload().r << "," << stub->getPayload().phi << "," << stub->getPayload().z << std::endl;
+            stub->writeRaw(f);
         }
     }
     ofs.close();
+    f.close();
+}
+
+std::vector<Stub> readStubFile(std::string filename) {
+    std::vector<Stub> stubs;
+    Stub s;
+    std::ifstream file(filename, std::ifstream::binary);
+    while (file.read((char*)&s, sizeof(s))) {
+        stubs.push_back(s);
+    }
+    file.close();
+    return stubs;
 }
 
 
@@ -27,13 +41,8 @@ int main(int argc, char const *argv[]) {
         all_stubs.push_back(coordinate_corrector.run());
     }
     recordStubs(all_stubs);
-    std::ofstream f(path + "output.stubs", std::ofstream::binary);
-    all_stubs[0][0]->writeRaw(f);
-    all_stubs[0][0]->print();
-    f.close();
-    std::ifstream r(path + "output.stubs", std::ifstream::binary);
-    Stub s;
-    r.read((char*)&s, sizeof(s));
-    s.print();
+    for (auto i : StubReader(path + "output.stubs")) {
+       i.print(); 
+    }
     return 0;
 }

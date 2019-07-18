@@ -22,9 +22,9 @@ public:
     StubIntrinsicCoordinates getIntrinsicCoordinates(void);
     StubPayload getPayload(void);
 
-    void setHeader(StubHeader stub_header);
-    void setIntrinsicCoordinates(StubIntrinsicCoordinates stub_intrinsic);
-    void setPayload(StubPayload stub_payload);
+    void setHeader(StubHeader header);
+    void setIntrinsicCoordinates(StubIntrinsicCoordinates intrinsic);
+    void setPayload(StubPayload payload);
 
     void print(void);
     void writeRaw(std::ofstream& file);
