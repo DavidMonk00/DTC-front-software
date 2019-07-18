@@ -20,3 +20,4 @@
 #include "Module.hpp"
 #include "Stub.hpp"
 #include "StubReader.hpp"
+#include "StubWriter.hpp"

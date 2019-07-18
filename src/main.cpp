@@ -2,16 +2,18 @@
 
 void recordStubs(std::vector<std::array<Stub*, PAYLOAD_WIDTH> > all_stubs) {
     std::ofstream ofs(path + "output.csv");
-    std::ofstream f(path + "output.stubs", std::ofstream::binary);
+    // std::ofstream f(path + "output.stubs", std::ofstream::binary);
     ofs << "r" << "," << "phi" << "," << "z" << std::endl;
     for (auto link : all_stubs) {
+        StubWriter sw(path + "output.stubs");
+        sw.writeStubs(link);
         for (auto stub : link) {
             ofs << stub->getPayload().r << "," << stub->getPayload().phi << "," << stub->getPayload().z << std::endl;
-            stub->writeRaw(f);
+            // stub->writeRaw(f);
         }
     }
     ofs.close();
-    f.close();
+    // f.close();
 }
 
 std::vector<Stub> readStubFile(std::string filename) {
