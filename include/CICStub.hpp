@@ -1,3 +1,11 @@
+/*
+Filename: CICStub.hpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #pragma once
 
 

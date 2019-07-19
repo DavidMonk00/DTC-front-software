@@ -1,3 +1,11 @@
+/*
+Filename: Geometry.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for Geometry.
+*/
+
 #include "Geometry.hpp"
 
 template <class T>

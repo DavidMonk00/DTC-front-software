@@ -1,3 +1,11 @@
+/*
+Filename: LinkFormatter.hpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #include <vector>
 #include <array>
 #include <cstdint>

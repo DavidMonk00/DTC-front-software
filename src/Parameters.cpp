@@ -1,3 +1,11 @@
+/*
+Filename: Parameters.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for Parameters.
+*/
+
 #include "Parameters.hpp"
 
 Parameters::Parameters(float param_range, int param_bits) {

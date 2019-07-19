@@ -1,3 +1,11 @@
+/*
+Filename: StubReader.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #include "StubReader.hpp"
 
 StubReader::StubReader(void) {}
@@ -24,5 +32,5 @@ std::vector<Stub> StubReader::getStubs(void) {
 }
 
 void StubReader::openFile(std::string filename) {
-    ifs.open(filename);
+    ifs.open(filename, std::ifstream::binary);
 }

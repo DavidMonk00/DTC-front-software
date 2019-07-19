@@ -1,3 +1,11 @@
+/*
+Filename: main.hpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #include <iostream>
 #include <vector>
 #include <array>

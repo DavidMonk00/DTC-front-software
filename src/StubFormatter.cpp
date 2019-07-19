@@ -1,3 +1,11 @@
+/*
+Filename: StubFormatter.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #include "StubFormatter.hpp"
 
 StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int link) {

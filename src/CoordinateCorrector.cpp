@@ -1,3 +1,11 @@
+/*
+Filename: CoordinateCorrector.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for CoordinateCorrector.
+*/
+
 #include "CoordinateCorrector.hpp"
 
 CoordinateCorrector::CoordinateCorrector(std::array<Stub*, PAYLOAD_WIDTH> stubs_in, int link) {

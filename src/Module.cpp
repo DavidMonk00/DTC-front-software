@@ -1,3 +1,11 @@
+/*
+Filename: Module.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for Module.
+*/
+
 #include "Module.hpp"
 
 Module::Module(std::vector<std::string> params) {

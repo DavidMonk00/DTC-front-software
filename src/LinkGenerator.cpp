@@ -1,3 +1,11 @@
+/*
+Filename: LinkGenerator.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for LinkGenerator.
+*/
+
 #include "LinkGenerator.hpp"
 
 LinkGenerator::LinkGenerator() {

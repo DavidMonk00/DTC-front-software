@@ -1,3 +1,11 @@
+/*
+Filename: StubWriter.hpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Add description here.
+*/
+
 #pragma once
 
 #include <fstream>
@@ -14,10 +22,28 @@ private:
 public:
     StubWriter();
     StubWriter(std::string filename);
-    StubWriter(std::string filename, std::vector<Stub> stubs);
+    template <class T>
+    StubWriter(std::string filename, T stubs);
     ~StubWriter(void);
 
     template <class T>
     void writeStubs(T stubs);
     void openFile(std::string filename);
 };
+
+template <class T>
+StubWriter::StubWriter(std::string filename, T stubs) {
+    openFile(filename);
+    writeStubs(stubs);
+}
+
+template <class T>
+void StubWriter::writeStubs(T stubs) {
+    if (ofs.is_open()) {
+        for (auto stub : stubs) {
+            stub->writeRaw(ofs);
+        }
+    } else {
+        throw std::runtime_error("Error writing stubs file: file is not open.");
+    }
+}

@@ -1,3 +1,11 @@
+/*
+Filename: NonantAssigment.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for NonantAssignment.
+*/
+
 #include "NonantAssigment.hpp"
 
 NonantAssigment::NonantAssigment(void) {
@@ -9,21 +17,6 @@ NonantAssigment::NonantAssigment(void) {
 NonantAssigment::~NonantAssigment(void) {
 
 }
-
-// int NonantAssigment::assignModule(float r, int module_type, float spacing) {
-//     float rT = r - T_rphi;
-//     float A = (module_type) ? 0.089/spacing : 0.099/spacing;
-//     float B;
-//     float tilt = module.getTilt_angle();
-//     if (tilt == 0) {
-//         B = 1
-//     } else if (tilt == 90) {
-//         B = abs(module.getZ()) * 1/r
-//     }
-//     float C = rT*(1/r);
-//     float D = A*B;
-//     return D > 0;
-// }
 
 int NonantAssigment::assignModule(Module module, float phi0, uint8_t bend) {
     float r = module.getR();

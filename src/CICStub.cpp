@@ -1,3 +1,11 @@
+/*
+Filename: CICStub.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for CICStub.
+*/
+
 #include "CICStub.hpp"
 
 CICStub::CICStub(void) {}

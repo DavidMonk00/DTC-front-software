@@ -1,3 +1,11 @@
+/*
+Filename: Stub.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for Stub.
+*/
+
 #include "Stub.hpp"
 
 Stub::Stub(void) {}

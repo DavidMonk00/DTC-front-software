@@ -1,3 +1,11 @@
+/*
+Filename: Correction.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Source file defining class methods for Correction.
+*/
+
 #include "Correction.hpp"
 
 float degToRad(float deg) {

@@ -1,3 +1,11 @@
+/*
+Filename: commonfuncs.cpp
+Author: David Monk
+Institution: Imperial College London
+
+Description: Common functions used within the codebase in multiple classes.
+*/
+
 #include "commonfuncs.hpp"
 
 std::vector<uint64_t> getLUT(std::string filename, int lines) {
