@@ -3,7 +3,7 @@ Filename: commonfuncs.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header file for commmon fucntions used within the codebase.
 */
 
 #pragma once

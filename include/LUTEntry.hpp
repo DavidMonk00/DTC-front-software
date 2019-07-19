@@ -3,7 +3,7 @@ Filename: LUTEntry.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for LUTEntry class.
 */
 
 #pragma once

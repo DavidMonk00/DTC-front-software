@@ -3,7 +3,7 @@ Filename: CoordinateCorrector.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for CoordinateCorrector class.
 */
 
 #pragma once

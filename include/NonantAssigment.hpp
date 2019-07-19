@@ -3,7 +3,7 @@ Filename: NonantAssigment.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for NonantAssignment class.
 */
 
 #pragma once

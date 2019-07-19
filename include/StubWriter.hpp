@@ -3,7 +3,7 @@ Filename: StubWriter.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for StubWriter class.
 */
 
 #pragma once

@@ -3,7 +3,7 @@ Filename: StubFormatter.cpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Source file defining class methods for StubFormatter.
 */
 
 #include "StubFormatter.hpp"

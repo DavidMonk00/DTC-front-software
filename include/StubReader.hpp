@@ -3,7 +3,7 @@ Filename: StubReader.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for StubReader class.
 */
 
 #pragma once

@@ -3,7 +3,7 @@ Filename: StubReader.cpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Source file defining class methods for StubReader.
 */
 
 #include "StubReader.hpp"

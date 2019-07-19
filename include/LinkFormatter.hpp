@@ -3,7 +3,7 @@ Filename: LinkFormatter.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for LinkFormatter class.
 */
 
 #include <vector>

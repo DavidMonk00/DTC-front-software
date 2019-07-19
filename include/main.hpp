@@ -3,7 +3,7 @@ Filename: main.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header file for main function.
 */
 
 #include <iostream>

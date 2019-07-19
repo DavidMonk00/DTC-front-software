@@ -3,7 +3,7 @@ Filename: Entity.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for Entity base class.
 */
 
 #pragma once

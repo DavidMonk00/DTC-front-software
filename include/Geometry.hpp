@@ -3,7 +3,7 @@ Filename: Geometry.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for Geometry class.
 */
 
 #pragma once

@@ -3,7 +3,7 @@ Filename: StubFormatter.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for StubFormatter class.
 */
 
 #pragma once

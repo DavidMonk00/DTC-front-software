@@ -3,7 +3,7 @@ Filename: Correction.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for Correction class and derived classes.
 */
 
 #pragma once
@@ -39,10 +39,3 @@ public:
     float phi(float x, float z);
     float z(float x, float z);
 };
-
-// class ExactCorrection : public Correction {
-// public:
-//     float r(float x, float z);
-//     float phi(float x, float z);
-//     float z(float x, float z);
-// };

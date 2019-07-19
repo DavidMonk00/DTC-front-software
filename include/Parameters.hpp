@@ -3,7 +3,7 @@ Filename: Parameters.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for Parameters class.
 */
 
 #pragma once

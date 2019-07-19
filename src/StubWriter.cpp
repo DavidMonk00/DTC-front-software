@@ -3,7 +3,7 @@ Filename: StubWriter.cpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Source file defining class methods for StubWriter.
 */
 
 #include "StubWriter.hpp"

@@ -3,7 +3,7 @@ Filename: constants.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header file for constants used in the codebase.
 */
 
 #pragma once

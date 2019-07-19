@@ -3,7 +3,7 @@ Filename: Stub.hpp
 Author: David Monk
 Institution: Imperial College London
 
-Description: Add description here.
+Description: Header for Stub class.
 */
 
 #pragma once
