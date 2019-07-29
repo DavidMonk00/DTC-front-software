@@ -28,6 +28,12 @@ T getSlice(uint64_t word, int start, int end) {
     return (T)(slice >> (64 - (start - end)));
 }
 
+template <class T>
+uint64_t setSlice(uint64_t word, T slice, int index) {
+    uint64_t s = (uint64_t)slice;
+    return word | (s << index);
+}
+
 std::vector<uint64_t> getLUT(std::string filename, int lines=0);
 
 // trim from start (in place)

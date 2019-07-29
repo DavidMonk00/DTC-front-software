@@ -17,7 +17,7 @@ Description: Header file for constants used in the codebase.
 #define HEADER_WIDTH 8
 #define PAYLOAD_WIDTH PACKET_SIZE - HEADER_WIDTH
 
-#define LINK_NUMBER 36
+#define LINK_NUMBER 1
 
 #define PI 3.14159265359
 

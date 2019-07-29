@@ -29,3 +29,4 @@ Description: Header file for main function.
 #include "Stub.hpp"
 #include "StubReader.hpp"
 #include "StubWriter.hpp"
+#include "RouterInputReformatting.hpp"
