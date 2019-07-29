@@ -20,17 +20,6 @@ void recordStubs(std::vector<std::array<Stub*, PAYLOAD_WIDTH> > all_stubs) {
     ofs.close();
 }
 
-std::vector<Stub> readStubFile(std::string filename) {
-    std::vector<Stub> stubs;
-    Stub s;
-    std::ifstream file(filename, std::ifstream::binary);
-    while (file.read((char*)&s, sizeof(s))) {
-        stubs.push_back(s);
-    }
-    file.close();
-    return stubs;
-}
-
 
 int main(int argc, char const *argv[]) {
     Geometry g;
