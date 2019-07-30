@@ -18,7 +18,8 @@ struct CICHeader {
 struct CICPayload {
     bool valid;
     uint8_t bx;
-    uint16_t row;
+    uint8_t strip;
+    uint8_t fe_module;
     uint8_t column;
     int8_t bend;
 };

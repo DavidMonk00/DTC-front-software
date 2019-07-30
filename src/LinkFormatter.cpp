@@ -30,9 +30,12 @@ std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> LinkFormatter::run(void) {
             payload.bx = getSlice<uint8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 0), 64 - (j * STUB_WIDTH + 7));
-            payload.row = getSlice<uint16_t>(
+            payload.fe_module = getSlice<uint8_t>(
                     link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 7), 64 - (j * STUB_WIDTH + 18));
+                    64 - (j * STUB_WIDTH + 7), 64 - (j * STUB_WIDTH + 10));
+            payload.strip = getSlice<uint8_t>(
+                    link_in[HEADER_WIDTH + i],
+                    64 - (j * STUB_WIDTH + 10), 64 - (j * STUB_WIDTH + 18));
             payload.column = getSlice<uint8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 18), 64 - (j * STUB_WIDTH + 23));
