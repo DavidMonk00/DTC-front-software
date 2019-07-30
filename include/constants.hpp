@@ -21,6 +21,8 @@ static const int STUB_WIDTH = 32;
 static const int LINK_NUMBER = 1;
 static const int STUBS_PER_WORD = 2;
 
+static const int FE_MODULES = 8;
+
 static constexpr float PI = 3.14159265359;
 
 extern const std::string path;

@@ -13,7 +13,7 @@ StubFormatter::StubFormatter(std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> 
     cic_array = cic_arr;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
     for (int i = 0; i < 3; i++) {
-        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif", LINK_NUMBER);
+        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif", LINK_NUMBER*FE_MODULES);
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[2][i] << 36;
@@ -35,7 +35,7 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
 
         stub_array[i] = new Stub;
         
-        int fe_module = (int)getSlice<uint8_t>(cic_payload.row, 10, 7);
+        int fe_module = (int)getSlice<uint8_t>(cic_payload.row, 11, 8);
         int address = (link_number << 3) + fe_module;
 
 
@@ -51,7 +51,7 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         intrinsic.column = cic_payload.column;
         payload.valid = cic_payload.valid;
         payload.bend = cic_payload.bend;
-        intrinsic.crossterm = (int)((int)getSlice<uint8_t>(cic_payload.row, 8, 0) * (int)cic_payload.column);
+        intrinsic.crossterm = (int)((int)getSlice<int8_t>(cic_payload.row, 8, 0) * (int)cic_payload.column);
 
         payload.r = getSlice<int>(lut[address], 12, 0);
         payload.z = getSlice<int>(lut[address], 24, 12);

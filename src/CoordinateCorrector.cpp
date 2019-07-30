@@ -12,7 +12,7 @@ CoordinateCorrector::CoordinateCorrector(std::array<Stub*, STUBS_PER_WORD*PAYLOA
     stubs = stubs_in;
     std::array<std::vector<uint64_t>, 2> lut_file_array;
     for (int i = 0; i < lut_file_array.size(); i++) {
-        lut_file_array[i] = getLUT("correction_" + std::to_string(i) + ".mif", LINK_NUMBER);
+        lut_file_array[i] = getLUT("correction_" + std::to_string(i) + ".mif", LINK_NUMBER*FE_MODULES);
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[0][i] << 36;
