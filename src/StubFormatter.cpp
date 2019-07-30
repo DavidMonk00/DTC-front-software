@@ -54,8 +54,8 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         payload.r = getSlice<int>(lut[address], 12, 0);
         payload.z = getSlice<int>(lut[address], 24, 12);
         payload.phi = getSlice<int>(lut[address], 41, 24);
-        payload.alpha = getSlice<int8_t>(lut[address], 44, 41);
-        payload.layer = getSlice<uint8_t>(lut[address], 46, 44);
+        payload.alpha = getSlice<int8_t>(lut[address], 45, 41);
+        payload.layer = getSlice<uint8_t>(lut[address], 46, 45);
         payload.barrel = getSlice<bool>(lut[address], 47, 46);
         payload.module = getSlice<bool>(lut[address], 48, 47);
 
