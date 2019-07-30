@@ -72,7 +72,7 @@ void Geometry::generateModuleLUTs(void) {
         uint64_t phi_bits;
         uint64_t z_bits;
         uint64_t layer = module.getLayer() & 0x3;
-        uint64_t barrel = 0x0 & 0x1;
+        uint64_t barrel = 0x0 & 0x1; // THIS IS NEEDS TO BE ELABORATED
         uint64_t module_type = module.getModule_type() & 0x1;
         for (fe_module = 0; fe_module < 8; fe_module++) {
             x = (2*fe_module + 1) * width/16 - width/2;
@@ -114,7 +114,7 @@ void Geometry::generateCorrectionLUTs(void) {
     for (auto module: modules) {
         uint64_t entry = 0;
         width = module.getWidth();
-        xgranularity = module.getWidth()/1024;
+        xgranularity = module.getWidth()/2048;
         zgranularity = module.getLength()/16;
         ExactCorrection corrector(&module);
         uint64_t r_bits;
