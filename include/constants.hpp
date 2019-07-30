@@ -13,13 +13,15 @@ Description: Header file for constants used in the codebase.
 
 #include "Parameters.hpp"
 
-#define PACKET_SIZE 64
-#define HEADER_WIDTH 8
-#define PAYLOAD_WIDTH PACKET_SIZE - HEADER_WIDTH
+static const int PACKET_SIZE = 64;
+static const int HEADER_WIDTH = 6;
+static const int PAYLOAD_WIDTH = (PACKET_SIZE - HEADER_WIDTH);
+static const int STUB_WIDTH = 32;
 
-#define LINK_NUMBER 1
+static const int LINK_NUMBER = 1;
+static const int STUBS_PER_WORD = 2;
 
-#define PI 3.14159265359
+static constexpr float PI = 3.14159265359;
 
 extern const std::string path;
 

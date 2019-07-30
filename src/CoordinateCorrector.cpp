@@ -8,7 +8,7 @@ Description: Source file defining class methods for CoordinateCorrector.
 
 #include "CoordinateCorrector.hpp"
 
-CoordinateCorrector::CoordinateCorrector(std::array<Stub*, PAYLOAD_WIDTH> stubs_in, int link) {
+CoordinateCorrector::CoordinateCorrector(std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stubs_in, int link) {
     stubs = stubs_in;
     std::array<std::vector<uint64_t>, 2> lut_file_array;
     for (int i = 0; i < lut_file_array.size(); i++) {
@@ -29,8 +29,8 @@ CoordinateCorrector::CoordinateCorrector(std::array<Stub*, PAYLOAD_WIDTH> stubs_
 
 CoordinateCorrector::~CoordinateCorrector() {}
 
-std::array<Stub*, PAYLOAD_WIDTH> CoordinateCorrector::run() {
-    for (int i = 0; i < PAYLOAD_WIDTH; i++) {
+std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> CoordinateCorrector::run() {
+    for (int i = 0; i < STUBS_PER_WORD*PAYLOAD_WIDTH; i++) {
         StubIntrinsicCoordinates intrinsic = stubs[i]->getIntrinsicCoordinates();
         StubPayload payload = stubs[i]->getPayload();
         payload.r += matrix.sinbeta*(int)intrinsic.column + matrix.sintheta*(int)intrinsic.strip;

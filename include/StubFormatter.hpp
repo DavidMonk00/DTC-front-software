@@ -24,12 +24,12 @@ Description: Header for StubFormatter class.
 
 class StubFormatter {
 private:
-    std::array<CICStub*, PAYLOAD_WIDTH> cic_array;
+    std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> cic_array;
     std::vector<uint64_t> lut;
     int link_number;
 
 public:
-    StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int link = 0);
+    StubFormatter(std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> cic_arr, int link = 0);
     virtual ~StubFormatter(void);
-    std::array<Stub*, PAYLOAD_WIDTH> run(std::vector<Module> modules);
+    std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> run(std::vector<Module> modules);
 };

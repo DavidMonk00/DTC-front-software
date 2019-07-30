@@ -1,14 +1,14 @@
 #include "RouterInputReformatting.hpp"
 
-RouterInputReformatting::RouterInputReformatting(std::array<Stub*, PAYLOAD_WIDTH> stubs) {
+RouterInputReformatting::RouterInputReformatting(std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stubs) {
     this->stubs = stubs;
 }
 
 RouterInputReformatting::~RouterInputReformatting(void) {}
 
-std::array<uint64_t, 2*PAYLOAD_WIDTH> RouterInputReformatting::run(void) {
-    std::array<uint64_t, 2*PAYLOAD_WIDTH> words_out;
-    for (int i = 0; i < PAYLOAD_WIDTH; i++) {
+std::array<uint64_t, 2*STUBS_PER_WORD*PAYLOAD_WIDTH> RouterInputReformatting::run(void) {
+    std::array<uint64_t, 2*STUBS_PER_WORD*PAYLOAD_WIDTH> words_out;
+    for (int i = 0; i < STUBS_PER_WORD*PAYLOAD_WIDTH; i++) {
         words_out[2 * i] = 0;
         words_out[2 * i] = setSlice<uint8_t>(words_out[2 * i], (uint8_t)stubs[i]->getHeader().bx, 0);
         words_out[2 * i] |= setSlice<uint8_t>(words_out[2 * i], (uint8_t)stubs[i]->getHeader().nonant, 5);

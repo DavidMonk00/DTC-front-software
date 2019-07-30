@@ -10,10 +10,10 @@
 
 class RouterInputReformatting {
 private:
-    std::array<Stub*, PAYLOAD_WIDTH> stubs;
+    std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stubs;
 public:
-    RouterInputReformatting(std::array<Stub*, PAYLOAD_WIDTH> stubs);
+    RouterInputReformatting(std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stubs);
     ~RouterInputReformatting(void);
 
-    std::array<uint64_t, 2*PAYLOAD_WIDTH> run(void);
+    std::array<uint64_t, 2*STUBS_PER_WORD*PAYLOAD_WIDTH> run(void);
 };

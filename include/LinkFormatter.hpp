@@ -25,5 +25,5 @@ public:
     LinkFormatter (std::array<uint64_t, PACKET_SIZE> packet_in);
     virtual ~LinkFormatter (void);
 
-    std::array<CICStub*, PAYLOAD_WIDTH> run(void);
+    std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> run(void);
 };

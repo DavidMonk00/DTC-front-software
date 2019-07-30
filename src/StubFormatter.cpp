@@ -8,7 +8,7 @@ Description: Source file defining class methods for StubFormatter.
 
 #include "StubFormatter.hpp"
 
-StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int link) {
+StubFormatter::StubFormatter(std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> cic_arr, int link) {
     link_number = link;
     cic_array = cic_arr;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
@@ -25,11 +25,11 @@ StubFormatter::StubFormatter(std::array<CICStub*, PAYLOAD_WIDTH> cic_arr, int li
 
 StubFormatter::~StubFormatter(void) {}
 
-std::array<Stub*, PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules) {
+std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<Module> modules) {
     NonantAssigment assigner;
 
-    std::array<Stub*, PAYLOAD_WIDTH> stub_array;
-    for (int i = 0; i < PAYLOAD_WIDTH; i++) {
+    std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stub_array;
+    for (int i = 0; i < STUBS_PER_WORD*PAYLOAD_WIDTH; i++) {
         CICHeader cic_header = cic_array[i]->getHeader();
         CICPayload cic_payload = cic_array[i]->getPayload();
 
