@@ -22,10 +22,14 @@ Description: Header file for commmon fucntions used within the codebase.
 
 #include "constants.hpp"
 
-template <class T>
+template <class S, class T>
 T getSlice(uint64_t word, int start, int end) {
+    int bit_length = start - end;
+    std::cout << sizeof(T)*__CHAR_BIT__ - bit_length << std::endl;
     uint64_t slice = word << (64 - start);
-    return (T)(slice >> (64 - (start - end)));
+    S unsigned_type = (S)(slice >> (64 - bit_length));
+    unsigned_type = unsigned_type << (sizeof(T)*__CHAR_BIT__ - bit_length);
+    return ((T)unsigned_type) >> (sizeof(T)*__CHAR_BIT__ - bit_length);
 }
 
 template <class T>

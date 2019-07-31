@@ -37,8 +37,8 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         
         int address = (link_number << 3) + cic_payload.fe_module;
 
-        uint8_t bx_tmp = getSlice<uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
-        bx_tmp += getSlice<uint8_t>(cic_payload.bx, 3, 0);
+        uint8_t bx_tmp = getSlice<uint8_t, uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
+        bx_tmp += getSlice<uint8_t, uint8_t>(cic_payload.bx, 3, 0);
 
         StubHeader header;
         StubIntrinsicCoordinates intrinsic;
@@ -51,13 +51,13 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         payload.bend = cic_payload.bend;
         intrinsic.crossterm = (int)cic_payload.strip * (int)cic_payload.column;
 
-        payload.r = getSlice<int>(lut[address], 12, 0);
-        payload.z = getSlice<int>(lut[address], 24, 12);
-        payload.phi = getSlice<int>(lut[address], 41, 24);
-        payload.alpha = getSlice<int8_t>(lut[address], 45, 41);
-        payload.layer = getSlice<uint8_t>(lut[address], 46, 45);
-        payload.barrel = getSlice<bool>(lut[address], 47, 46);
-        payload.module = getSlice<bool>(lut[address], 48, 47);
+        payload.r = getSlice<uint16_t, uint16_t>(lut[address], 12, 0);
+        payload.z = getSlice<uint16_t, int16_t>(lut[address], 24, 12);
+        payload.phi = getSlice<uint32_t, int32_t>(lut[address], 41, 24);
+        payload.alpha = getSlice<uint8_t, int8_t>(lut[address], 45, 41);
+        payload.layer = getSlice<uint8_t, uint8_t>(lut[address], 46, 45);
+        payload.barrel = getSlice<bool, bool>(lut[address], 47, 46);
+        payload.module = getSlice<bool, bool>(lut[address], 48, 47);
 
 
         float phi0 =  (float)cic_payload.strip * phiParams.getBasis(); //THIS IS NOT CORRECT - phi0 needs to be provided after after phi has been looked up - (befor coorrection ok?)

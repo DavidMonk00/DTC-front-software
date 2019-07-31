@@ -17,8 +17,8 @@ LinkFormatter::~LinkFormatter(void) {}
 
 std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> LinkFormatter::run(void) {
     CICHeader header;
-    header.boxcar_number = getSlice<uint16_t>(link_in[0], 64, 52);
-    header.stub_count = getSlice<uint8_t>(link_in[0], 52, 46);
+    header.boxcar_number = getSlice<uint16_t, uint16_t>(link_in[0], 64, 52);
+    header.stub_count = getSlice<uint8_t, uint8_t>(link_in[0], 52, 46);
 
     std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> cic_array;
     for (int i = 0; i < PAYLOAD_WIDTH; i++) {
@@ -27,30 +27,21 @@ std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> LinkFormatter::run(void) {
             
             CICPayload payload;
             payload.valid = 1; //getSlice<bool>(link_in[HEADER_WIDTH + i], 64, 63);
-            payload.bx = getSlice<uint8_t>(
+            payload.bx = getSlice<uint8_t, uint8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 0), 64 - (j * STUB_WIDTH + 7));
-            payload.fe_module = getSlice<uint8_t>(
+            payload.fe_module = getSlice<uint8_t, uint8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 7), 64 - (j * STUB_WIDTH + 10));
-            uint8_t strip = getSlice<uint8_t>(
+            payload.strip = getSlice<uint8_t, int8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 10), 64 - (j * STUB_WIDTH + 18));
-            strip = strip << 0;
-            payload.strip = (int8_t)strip;
-            payload.strip = (payload.strip >> 0);
-            uint8_t column = getSlice<uint8_t>(
+            payload.column = getSlice<uint8_t, int8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 18), 64 - (j * STUB_WIDTH + 23));
-            column = column << 3;
-            payload.column = (int8_t)column;
-            payload.column = (payload.column >> 3);
-            uint8_t bend = getSlice<uint8_t>(
+            payload.bend = getSlice<uint8_t, int8_t>(
                     link_in[HEADER_WIDTH + i],
                     64 - (j * STUB_WIDTH + 23), 64 - (j * STUB_WIDTH + 27));
-            bend = bend << 4;
-            payload.bend = (int8_t)bend;
-            payload.bend = (payload.bend >> 4);
             
 
             cic_array[STUBS_PER_WORD * i + j]->setHeader(header);

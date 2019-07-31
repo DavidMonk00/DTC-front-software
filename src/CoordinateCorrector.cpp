@@ -20,11 +20,11 @@ CoordinateCorrector::CoordinateCorrector(std::array<Stub*, STUBS_PER_WORD*PAYLOA
         word += lut_file_array[2][i];
         lut.push_back(word);
     }
-    matrix.sintheta = getSlice<int>(lut[link], 6, 0);
-    matrix.sinbeta = getSlice<int>(lut[link], 12, 6);
-    matrix.rinv = getSlice<int>(lut[link], 18, 12);
-    matrix.sinbeta_rsquared = getSlice<int>(lut[link], 24, 18);
-    matrix.cosbeta = getSlice<int>(lut[link], 30, 24);
+    matrix.sintheta = getSlice<uint8_t, int8_t>(lut[link], 6, 0);
+    matrix.sinbeta = getSlice<uint8_t, int8_t>(lut[link], 12, 6);
+    matrix.rinv = getSlice<uint8_t, int8_t>(lut[link], 18, 12);
+    matrix.sinbeta_rsquared = getSlice<uint8_t, int8_t>(lut[link], 24, 18);
+    matrix.cosbeta = getSlice<uint8_t, int8_t>(lut[link], 30, 24);
 }
 
 CoordinateCorrector::~CoordinateCorrector() {}

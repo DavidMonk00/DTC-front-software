@@ -37,9 +37,9 @@ struct StubIntrinsicCoordinates {
 
 struct StubPayload {
     bool valid;
-    int r;
-    int z;
-    int phi;
+    uint16_t r;
+    int16_t z;
+    int32_t phi;
     int8_t alpha;
     int8_t bend;
     uint8_t layer;

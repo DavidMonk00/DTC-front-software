@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
         LinkFormatter link_formatter(link_gen.run());
         StubFormatter stub_formatter(link_formatter.run(), i);
         std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> stubs = stub_formatter.run(modules);
-        CoordinateCorrector coordinate_corrector(stubs);
+        CoordinateCorrector coordinate_corrector(stubs, i);
         std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> corrected_stubs = coordinate_corrector.run();
         all_stubs.push_back(corrected_stubs);
         RouterInputReformatting router_formatter(corrected_stubs);
