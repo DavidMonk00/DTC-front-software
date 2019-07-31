@@ -33,6 +33,7 @@ struct StubIntrinsicCoordinates {
     int8_t strip;
     int8_t column;
     int crossterm;
+    uint8_t fe_module;
 };
 
 struct StubPayload {

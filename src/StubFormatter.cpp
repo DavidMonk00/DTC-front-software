@@ -47,6 +47,7 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         header.bx = bx_tmp % 18;
         intrinsic.strip = cic_payload.strip;
         intrinsic.column = cic_payload.column;
+        intrinsic.fe_module = cic_payload.fe_module;
         payload.valid = cic_payload.valid;
         payload.bend = cic_payload.bend;
         intrinsic.crossterm = (int)cic_payload.strip * (int)cic_payload.column;
