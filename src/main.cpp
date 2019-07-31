@@ -37,9 +37,12 @@ int main(int argc, char const *argv[]) {
         all_stubs.push_back(corrected_stubs);
         RouterInputReformatting router_formatter(corrected_stubs);
         std::array<uint64_t, 2*STUBS_PER_WORD*PAYLOAD_WIDTH> words_out = router_formatter.run();
+        std::ofstream f("output.txt");
+        f << "header" << "," << "data" << std::endl;
         for (int j = 0; j < STUBS_PER_WORD*PAYLOAD_WIDTH; j++) {
-            std::cout << words_out[2 * j] << " " << words_out[2 * j + 1] << std::endl;
+            f << words_out[2 * j] << "," << words_out[2 * j + 1] << std::endl;
         }
+        f.close();
     }
     recordStubs(all_stubs);
     for (auto i : StubReader(path + "output.stubs")) {
