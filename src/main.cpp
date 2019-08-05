@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
         std::ofstream f("output.txt");
         f << "header" << "," << "data" << std::endl;
         for (int j = 0; j < STUBS_PER_WORD*PAYLOAD_WIDTH; j++) {
-            f << words_out[2 * j] << "," << words_out[2 * j + 1] << std::endl;
+            f << std::hex << words_out[2 * j] << "," << words_out[2 * j + 1] << std::endl;
         }
         f.close();
     }

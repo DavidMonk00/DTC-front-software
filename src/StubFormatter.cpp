@@ -13,7 +13,7 @@ StubFormatter::StubFormatter(std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> 
     cic_array = cic_arr;
     std::array<std::vector<uint64_t>, 3> lut_file_array;
     for (int i = 0; i < 3; i++) {
-        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif", LINK_NUMBER*FE_MODULES);
+        lut_file_array[i] = getLUT("modules_" + std::to_string(i) + ".mif", STUBS_PER_WORD*LINK_NUMBER*FE_MODULES);
     }
     for (int i = 0; i < lut_file_array[0].size(); i++) {
         uint64_t word = lut_file_array[2][i] << 36;
@@ -35,7 +35,7 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
 
         stub_array[i] = new Stub;
         
-        int address = (link_number << 3) + cic_payload.fe_module;
+        int address = ((STUBS_PER_WORD*link_number + i % STUBS_PER_WORD) << 3) + cic_payload.fe_module;
 
         uint8_t bx_tmp = getSlice<uint8_t, uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
         bx_tmp += getSlice<uint8_t, uint8_t>(cic_payload.bx, 3, 0);
