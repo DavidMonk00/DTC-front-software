@@ -12,7 +12,7 @@ std::array<uint64_t, 2*STUBS_PER_WORD*PAYLOAD_WIDTH> RouterInputReformatting::ru
         // stubs[i]->print();
         words_out[2 * i] = 0;
         words_out[2 * i] = setSlice<uint8_t>(words_out[2 * i], (uint8_t)stubs[i]->getHeader().bx, 5, 0);
-        words_out[2 * i] |= setSlice<uint8_t>(words_out[2 * i], (uint8_t)stubs[i]->getHeader().nonant, 7, 5);
+        // words_out[2 * i] |= setSlice<uint8_t>(words_out[2 * i], (uint8_t)stubs[i]->getHeader().nonant, 7, 5);
         words_out[2 * i + 1] = 0;
         words_out[2 * i + 1] |= setSlice<uint16_t>(words_out[2 * i + 1], (uint16_t)stubs[i]->getPayload().r, 12, 0);
         words_out[2 * i + 1] |= setSlice<int16_t>(words_out[2 * i + 1], (int16_t)stubs[i]->getPayload().z, 24, 12);

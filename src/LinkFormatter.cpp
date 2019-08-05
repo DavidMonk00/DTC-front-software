@@ -27,21 +27,11 @@ std::array<CICStub*, STUBS_PER_WORD*PAYLOAD_WIDTH> LinkFormatter::run(void) {
             
             CICPayload payload;
             payload.valid = 1; //getSlice<bool>(link_in[HEADER_WIDTH + i], 64, 63);
-            payload.bx = getSlice<uint8_t, uint8_t>(
-                    link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 0), 64 - (j * STUB_WIDTH + 7));
-            payload.fe_module = getSlice<uint8_t, uint8_t>(
-                    link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 7), 64 - (j * STUB_WIDTH + 10));
-            payload.strip = getSlice<uint8_t, int8_t>(
-                    link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 10), 64 - (j * STUB_WIDTH + 18));
-            payload.column = getSlice<uint8_t, int8_t>(
-                    link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 18), 64 - (j * STUB_WIDTH + 23));
-            payload.bend = getSlice<uint8_t, int8_t>(
-                    link_in[HEADER_WIDTH + i],
-                    64 - (j * STUB_WIDTH + 23), 64 - (j * STUB_WIDTH + 27));
+            payload.bx = getSlice<uint8_t, uint8_t>(link_in[HEADER_WIDTH + i], j*STUB_WIDTH + 7, j*STUB_WIDTH + 0);
+            payload.fe_module = getSlice<uint8_t, uint8_t>(link_in[HEADER_WIDTH + i], j*STUB_WIDTH + 10, j*STUB_WIDTH + 7);
+            payload.strip = getSlice<uint8_t, int8_t>(link_in[HEADER_WIDTH + i], j*STUB_WIDTH + 18, j*STUB_WIDTH + 10);
+            payload.column = getSlice<uint8_t, int8_t>(link_in[HEADER_WIDTH + i], j*STUB_WIDTH + 23, j*STUB_WIDTH + 18);
+            payload.bend = getSlice<uint8_t, int8_t>(link_in[HEADER_WIDTH + i], j*STUB_WIDTH + 27, j*STUB_WIDTH + 23);
             
 
             cic_array[STUBS_PER_WORD * i + j]->setHeader(header);

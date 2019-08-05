@@ -37,14 +37,14 @@ std::array<Stub*, STUBS_PER_WORD*PAYLOAD_WIDTH> StubFormatter::run(std::vector<M
         
         int address = ((STUBS_PER_WORD*link_number + i % STUBS_PER_WORD) << 3) + cic_payload.fe_module;
 
-        uint8_t bx_tmp = getSlice<uint8_t, uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
-        bx_tmp += getSlice<uint8_t, uint8_t>(cic_payload.bx, 3, 0);
+        // uint8_t bx_tmp = getSlice<uint8_t, uint8_t>(cic_header.boxcar_number, 5, 0) << 3;
+        // bx_tmp += getSlice<uint8_t, uint8_t>(cic_payload.bx, 3, 0);
 
         StubHeader header;
         StubIntrinsicCoordinates intrinsic;
         StubPayload payload;
 
-        header.bx = bx_tmp % 18;
+        header.bx = getSlice<uint8_t, uint8_t>(cic_payload.bx, 5, 0) % 18;
         intrinsic.strip = cic_payload.strip;
         intrinsic.column = cic_payload.column;
         intrinsic.fe_module = cic_payload.fe_module;
