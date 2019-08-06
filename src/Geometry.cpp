@@ -93,7 +93,7 @@ void Geometry::generateModuleLUTs(void) {
     }
     for (auto lut : luts) {
         for (int i = 0; i < 3; i++) {
-            lut_files[i] << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+            lut_files[i] << "0x" <<  std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
         }
     }
     for (int i = 0; i < 3; i++) {
@@ -143,7 +143,7 @@ void Geometry::generateCorrectionLUTs(void) {
     }
     for (auto lut : luts) {
         for (int i = 0; i < 2; i++) {
-            lut_files[i] << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+            lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
         }
     }
     for (int i = 0; i < 2; i++) {

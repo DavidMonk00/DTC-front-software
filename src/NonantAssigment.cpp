@@ -28,7 +28,7 @@ int NonantAssigment::assignModule(Module module, float phi0, uint8_t bend) {
     if (tilt == 0) {
         B = 1;
     } else if (tilt == 90) {
-        B = fabs(z) * 1/r;
+        B = fabs(z)/r;
     } else {
         B = B_offset + B_slope * (fabs(z)/r);
     }
@@ -50,5 +50,5 @@ int NonantAssigment::assignModule(Module module, float phi0, uint8_t bend) {
             sectors += i + 1;
         }
     }
-    return sectors;
+    return sectors - 1;
 }

@@ -18,8 +18,8 @@ static const int HEADER_WIDTH = 6;
 static const int PAYLOAD_WIDTH = (PACKET_SIZE - HEADER_WIDTH);
 static const int STUB_WIDTH = 32;
 
-static const int LINK_NUMBER = 1;
-static const int STUBS_PER_WORD = 2;
+static const int LINK_NUMBER = 18;
+static const int STUBS_PER_WORD = 1;
 
 static const int FE_MODULES = 8;
 
