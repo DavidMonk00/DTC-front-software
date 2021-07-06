@@ -72,7 +72,7 @@ void Geometry::generateModuleLUTs(void) {
         uint64_t phi_bits;
         uint64_t z_bits;
         uint64_t layer = module.getLayer() & 0x3;
-        uint64_t barrel = 0x0 & 0x1;
+        uint64_t barrel = 0x0 & 0x1; // THIS IS NEEDS TO BE ELABORATED
         uint64_t module_type = module.getModule_type() & 0x1;
         for (fe_module = 0; fe_module < 8; fe_module++) {
             x = (2*fe_module + 1) * width/16 - width/2;
@@ -83,7 +83,7 @@ void Geometry::generateModuleLUTs(void) {
             z.setExact(module.getZ() + corrector.z(x, z_local));
             z.generateBits(0xfff);
             z.setBits((z.getExact() < 0) ? setBit(z.getBits(), 11) : z.getBits());
-            entry = r.getBits() | (z.getBits() << 12) | (phi.getBits() << 24) | (layer << 44) | (barrel << 46) | (module_type << 47); 
+            entry = r.getBits() | (z.getBits() << 12) | (phi.getBits() << 24) | (layer << 44) | (barrel << 46) | (module_type << 47);
             luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff, (entry >> 36) & 0x3ffff});
         }
     }
@@ -93,7 +93,7 @@ void Geometry::generateModuleLUTs(void) {
     }
     for (auto lut : luts) {
         for (int i = 0; i < 3; i++) {
-            lut_files[i] << "0x" << std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
+            lut_files[i] << "0x" <<  std::setw(5) << std::setfill('0') << std::hex << lut[i] << std::endl;
         }
     }
     for (int i = 0; i < 3; i++) {
@@ -114,7 +114,7 @@ void Geometry::generateCorrectionLUTs(void) {
     for (auto module: modules) {
         uint64_t entry = 0;
         width = module.getWidth();
-        xgranularity = module.getWidth()/1024;
+        xgranularity = module.getWidth()/2048;
         zgranularity = module.getLength()/16;
         ExactCorrection corrector(&module);
         uint64_t r_bits;
@@ -133,7 +133,7 @@ void Geometry::generateCorrectionLUTs(void) {
             sintheta.generateBits(0x3f);
             sinbeta_rsquared.setExact(xgranularity*zgranularity*sin(module.getTilt_angle())/(r_true*r_true));
             sinbeta_rsquared.generateBits(0x3f);
-            entry = sintheta.getBits() | (sinbeta.getBits() << 6) | (rinv.getBits() << 12) | (sinbeta_rsquared.getBits() << 18) | (cosbeta.getBits() << 24); 
+            entry = sintheta.getBits() | (sinbeta.getBits() << 6) | (rinv.getBits() << 12) | (sinbeta_rsquared.getBits() << 18) | (cosbeta.getBits() << 24);
             luts.push_back({entry & 0x3fff, (entry >> 18) & 0x3ffff});
         }
     }

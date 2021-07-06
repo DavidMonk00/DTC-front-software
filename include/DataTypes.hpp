@@ -18,8 +18,9 @@ struct CICHeader {
 struct CICPayload {
     bool valid;
     uint8_t bx;
-    uint16_t row;
-    uint8_t column;
+    uint8_t fe_module;
+    int8_t strip;
+    int8_t column;
     int8_t bend;
 };
 
@@ -29,16 +30,17 @@ struct StubHeader {
 };
 
 struct StubIntrinsicCoordinates {
-    uint8_t strip;
-    uint8_t column;
+    int8_t strip;
+    int8_t column;
     int crossterm;
+    uint8_t fe_module;
 };
 
 struct StubPayload {
     bool valid;
-    int r;
-    int z;
-    int phi;
+    uint16_t r;
+    int16_t z;
+    int32_t phi;
     int8_t alpha;
     int8_t bend;
     uint8_t layer;

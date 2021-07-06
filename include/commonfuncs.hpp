@@ -22,16 +22,22 @@ Description: Header file for commmon fucntions used within the codebase.
 
 #include "constants.hpp"
 
-template <class T>
+template <class S, class T>
 T getSlice(uint64_t word, int start, int end) {
+    int bit_length = start - end;
     uint64_t slice = word << (64 - start);
-    return (T)(slice >> (64 - (start - end)));
+    S unsigned_type = (S)(slice >> (64 - bit_length));
+    unsigned_type = unsigned_type << (sizeof(T)*__CHAR_BIT__ - bit_length);
+    return ((T)unsigned_type) >> (sizeof(T)*__CHAR_BIT__ - bit_length);
 }
 
 template <class T>
-uint64_t setSlice(uint64_t word, T slice, int index) {
-    uint64_t s = (uint64_t)slice;
-    return word | (s << index);
+uint64_t setSlice(uint64_t word, T slice, int high, int low) {
+    int64_t ss = (int64_t)slice;
+    ss = ss << (64 - (high - low));
+    uint64_t s = (uint64_t)ss;
+    s = s >> (64 - high);
+    return word | s;
 }
 
 std::vector<uint64_t> getLUT(std::string filename, int lines=0);
